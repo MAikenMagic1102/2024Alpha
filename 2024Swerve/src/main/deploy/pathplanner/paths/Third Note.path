@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.167456764251632,
-        "y": 7.25472706759367
+        "x": 2.63,
+        "y": 5.55
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.801048510308355,
-        "y": 6.498417301453011
+        "x": 2.263812470379861,
+        "y": 5.448388141856785
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.3824031310034455,
-        "y": 5.795647647633324
+        "x": 2.0875842825030917,
+        "y": 4.772846754995836
       },
       "prevControl": {
-        "x": 4.526932997527966,
-        "y": 6.89407463321969
+        "x": 1.8705327678788255,
+        "y": 5.033308572544955
+      },
+      "nextControl": {
+        "x": 2.1610126941184116,
+        "y": 4.684732661057452
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.63,
+        "y": 4.317590602980848
+      },
+      "prevControl": {
+        "x": 2.5125145414154866,
+        "y": 4.405704696919233
       },
       "nextControl": null,
       "isLocked": false,
@@ -38,12 +54,12 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0.0,
-    "rotation": -88.40885972880548,
+    "velocity": 0,
+    "rotation": -30.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "TEST!",
+  "folder": "3 Note Test",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

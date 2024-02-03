@@ -3,6 +3,8 @@
   "robotLength": 0.9525,
   "holonomicMode": true,
   "pathFolders": [
+    "3 Note Test",
+    "3 Note Optimized",
     "TEST!"
   ],
   "autoFolders": [],
