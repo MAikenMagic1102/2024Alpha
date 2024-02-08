@@ -10,6 +10,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.mechanisms.swerve.utility.PhoenixPIDController;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -32,7 +33,7 @@ public class Shooter extends SubsystemBase {
     shooterPID = new PhoenixPIDController(Constants.Shooter.Shooter_kP, Constants.Shooter.Shooter_kI, Constants.Shooter.Shooter_kD);
     Shooter1.setInverted(Constants.Shooter.Shooter1_Inverted);
     Shooter2.setInverted(Constants.Shooter.Shooter2_Inverted);
-    Feeder.setInverted(true);
+    Feeder.setInverted(Constants.Shooter.Feeder_Inverted);
     Shooter2.setControl(new Follower(Constants.Shooter.Shooter1_ID, true));
     shooterSpeed = new VelocityVoltage(0);
   }
@@ -82,6 +83,10 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
+    
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Shooter Speed", Shooter1.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Feeder Speed", Feeder.getVelocity().getValueAsDouble());
+
   }
 }

@@ -16,12 +16,16 @@ public final class Constants {
         public static final int Feeder_ID = 13;
         public static final int noteSensor_DIO = 0;
 
-        public static final boolean Shooter1_Inverted = false;
-        public static final boolean Shooter2_Inverted = true;
+        public static final boolean Feeder_Inverted = true;
+
+        public static final boolean Shooter1_Inverted = true;
+        public static final boolean Shooter2_Inverted = false;
 
         public static final double Shooter_kP = 0.1;
         public static final double Shooter_kI = 0.0;
         public static final double Shooter_kD = 0.0;
+
+        public static final double Gear_Ratio = 84/74;
     }
 
     public static final class Arm{

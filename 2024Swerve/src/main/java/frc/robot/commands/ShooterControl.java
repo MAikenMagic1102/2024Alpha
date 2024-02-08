@@ -52,7 +52,7 @@ public class ShooterControl extends Command {
       m_Shooter.feederStop();
     }
 
-    m_Shooter.setShooterThrottle(-m_SpeedChooser.getSelected());
+    m_Shooter.setShooterThrottle(m_SpeedChooser.getSelected());
   }
 
   // Called once the command ends or is interrupted.
