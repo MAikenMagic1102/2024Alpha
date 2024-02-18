@@ -8,6 +8,7 @@ import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.mechanisms.swerve.utility.PhoenixPIDController;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,9 +27,9 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
   public Shooter(){
 
-    Shooter1 = new TalonFX(Constants.Shooter.Shooter1_ID);
-    Shooter2 = new TalonFX(Constants.Shooter.Shooter2_ID);
-    Feeder = new TalonFX(Constants.Shooter.Feeder_ID);
+    Shooter1 = new TalonFX(Constants.Shooter.Shooter1_ID,Constants.canivoreBus);
+    Shooter2 = new TalonFX(Constants.Shooter.Shooter2_ID,Constants.canivoreBus);
+    Feeder = new TalonFX(Constants.Shooter.Feeder_ID,Constants.canivoreBus);
     noteSensor = new DigitalInput(Constants.Shooter.noteSensor_DIO);
     shooterPID = new PhoenixPIDController(Constants.Shooter.Shooter_kP, Constants.Shooter.Shooter_kI, Constants.Shooter.Shooter_kD);
     Shooter1.setInverted(Constants.Shooter.Shooter1_Inverted);
@@ -39,15 +40,20 @@ public class Shooter extends SubsystemBase {
   }
 
   public void feederIn(){
-    Feeder.set(0.4);
+    if(noteSensor.get()){
+      Feeder.set(0.55);
+    }else{
+      Feeder.set(0);
+    }
   }
 
   public void feederOut(){
-    Feeder.set(-0.4);
+    Feeder.set(-0.5);
   }
 
   public void feederStop(){
     Feeder.set(0.0);
+    Feeder.setNeutralMode(NeutralModeValue.Brake);
   }
 
   public void feederShoot(boolean ready){
@@ -58,6 +64,11 @@ public class Shooter extends SubsystemBase {
       Feeder.set(0.0);
     }
   }
+
+    public void feederShootNow(){
+      Feeder.set(0.8);
+  }
+
 
   public void ShooterStop(){
     Shooter1.set(0.0);
@@ -85,7 +96,8 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Shooter Speed", Shooter1.getVelocity().getValueAsDouble());
+    SmartDashboard.putNumber("Shooter Speed", Shooter1.getVelocity().getValueAsDouble() * 60 * Constants.Shooter.Gear_Ratio );
+    SmartDashboard.putBoolean("Note Senor", noteSensor.get());
     // SmartDashboard.putNumber("Feeder Speed", Feeder.getVelocity().getValueAsDouble());
 
   }

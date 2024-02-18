@@ -6,6 +6,8 @@ package frc.robot;
 
 /** Add your docs here. */
 public final class Constants {
+    public static final String canivoreBus = "can2";
+
     public static final class SwerveDrivetrain{
 
     }
@@ -16,7 +18,7 @@ public final class Constants {
         public static final int Feeder_ID = 13;
         public static final int noteSensor_DIO = 0;
 
-        public static final boolean Feeder_Inverted = true;
+        public static final boolean Feeder_Inverted = false;
 
         public static final boolean Shooter1_Inverted = true;
         public static final boolean Shooter2_Inverted = false;

@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Vision.Limelight;
 import frc.robot.commands.*;
 
 public class RobotContainer {
@@ -38,6 +39,8 @@ public class RobotContainer {
 
   private final Shooter shooter = new Shooter();
 
+  private final Limelight vision = new Limelight();
+  
   private final Telemetry logger = new Telemetry(MaxSpeed);
 
   private final SendableChooser<Command> autoChooser;  
@@ -51,20 +54,20 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-        // drivetrain.setDefaultCommand(
-        //   new SwerveDriveControl(
-        //     drivetrain, 
-        //     () -> -joystick.getLeftX(),  //Translation 
-        //     () -> -joystick.getLeftY(),  //Translation
-        //     () -> -joystick.getRightX(), //Rotation
-        //     joystick.povUp(), 
-        //     joystick.povDown(), 
-        //     joystick.y(), //Face Forward
-        //     joystick.b(), //Face Right
-        //     joystick.a(), //Face Backwards
-        //     joystick.x()  //Face Left
-        //   )
-        // );
+        drivetrain.setDefaultCommand(
+          new SwerveDriveControl(
+            drivetrain, 
+            () -> -joystick.getLeftX(),  //Translation 
+            () -> -joystick.getLeftY(),  //Translation
+            () -> -joystick.getRightX(), //Rotation
+            joystick.povUp(), 
+            joystick.povDown(), 
+            joystick.y(), //Face Forward
+            joystick.b(), //Face Right
+            joystick.a(), //Face Backwards
+            joystick.x()  //Face Left
+          )
+        );
 
         shooter.setDefaultCommand(new FeederControl(shooter, joystick.leftBumper(), joystick.leftTrigger()));
 
@@ -72,12 +75,12 @@ public class RobotContainer {
     joystick.rightTrigger().whileTrue(new ShooterControl(shooter, joystick.rightBumper()));
     joystick.rightTrigger().whileFalse(new InstantCommand(() -> shooter.ShooterStop()));
     // reset the field-centric heading on left bumper press
-    // joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+    joystick.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
     // if (Utils.isSimulation()) {
     //   drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     // }
-    // drivetrain.registerTelemetry(logger::telemeterize);
+     drivetrain.registerTelemetry(logger::telemeterize);
   }
   
   
